@@ -31,6 +31,7 @@ function randomId() {
     return result;
 }
 $('.fb-share-push').on("click", function () {
+    var host ="https://www.brief.health/";
     var post_id = $(this).attr("data-app");
     var slug = $(this).attr("data-slug");
     var title = $(this).attr("data-name");
@@ -50,11 +51,11 @@ $('.fb-share-push').on("click", function () {
                 "cache-control": "no-cache"
             },
             "data": {
-                "query": 'mutation{\n  updatePromCount(type:"fbshare",inputData:"{\\"source\\": \\"https://www.brief.health/\\",\\"identifier\\": \\"' + post_id + '\\",\\"type\\": \\"Product\\",\\"personId\\": \\"e0900086-c153-11e8-9983-0d20fc029a28\\",\\"name\\": \\"HealtHIE Nevada\\",\\"status\\": \\"1\\",\\"productSlug\\": \\"healthie-nevada\\"}")\n}'
+                "query": 'mutation{\n  updatePromCount(type:"fbshare",inputData:"{\\"source\\": \\"'+host+'\\",\\"identifier\\": \\"' + post_id + '\\",\\"type\\": \\"Product\\",\\"personId\\": \\"e0900086-c153-11e8-9983-0d20fc029a28\\",\\"name\\": \\"HealtHIE Nevada\\",\\"status\\": \\"1\\",\\"productSlug\\": \\"healthie-nevada\\"}")\n}'
 
             }
         }
-        console.log('mutation{\n  updatePromCount(type:"fbshare",inputData:"{\\"source\\": \\"https://www.brief.health/\\",\\"identifier\\": \\"' + post_id + '\\",\\"type\\": \\"Product\\",\\"personId\\": \\"e0900086-c153-11e8-9983-0d20fc029a28\\",\\"name\\": \\"HealtHIE Nevada\\",\\"status\\": \\"1\\",\\"productSlug\\": \\"healthie-nevada\\"}")\n}');
+        console.log('mutation{\n  updatePromCount(type:"fbshare",inputData:"{\\"source\\": \\"'+host+'\\",\\"identifier\\": \\"' + post_id + '\\",\\"type\\": \\"Product\\",\\"personId\\": \\"e0900086-c153-11e8-9983-0d20fc029a28\\",\\"name\\": \\"HealtHIE Nevada\\",\\"status\\": \\"1\\",\\"productSlug\\": \\"healthie-nevada\\"}")\n}');
         $.ajax(settings).done(function (response) {
             console.log(response);
 
