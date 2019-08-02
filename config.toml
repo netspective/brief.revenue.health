@@ -1,4 +1,4 @@
-baseURL = "https://www.brief.health/"
+baseURL = "/"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 languageCode = "en-US"
@@ -9,8 +9,8 @@ paginate = 25
 home = ["HTML", "RSS","JSON"]
 
 [params]
-brand = "Health IT Briefing"
-description = "Netspective Media Health IT Briefing"
+brand = "Revenue Health"
+description = "Revenue Health"
 
 [permalinks]
 post = "/post/:year/:month/:day/:slug/"
