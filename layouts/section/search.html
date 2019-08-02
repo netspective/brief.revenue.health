@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+     
+<script src="/js/fuse_3.2.0.js"></script>
+<script src="/js/jquery_3.3.1_min.js"></script>
+<script src="/js/search.js"></script>
+{{ partial "head.html" . }}
+<body class="list-body">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $.Site.Params.GTMCode }}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<script>
+  $(window).bind("load", function () {
+    setTimeout(() => {  
+    $(".search-categories").each(function() {
+      //console.log($(this).html());
+      var replacedData = $(this).html().replace(/,/g, ', ');
+      $(this).html(replacedData);
+    });
+  },2000);
+  });
+  
+  </script>
+{{ partial "nav-bar.html" . }}
+<!--- popular -->
+<main id="search-results" class="">
+</main>
+  
+
+
+<script id="search-result-template" type="text/x-js-template">
+<div ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" class="card blog-card custom-card-row" rel="bookmark">
+    ${ isset featuredimage }<div class="card-img-container"><picture><a href="${ link }"> <img src="${featuredimage}" class="card-img" {{ if isset .Params "featuredimagedescription" }}alt="${Params.featuredimagedescription}"{{end}}> </a></picture></div>${ end }
+  <article class="card-body">
+    <a href="${ link }"><h2 class="card-title">${title}</h2></a>
+    <a href="${ link }"><div class="card-text ch-limit">${contents}</div></a>
+    <div id="summary-${key}">
+      ${ isset tags }<p>Tags: ${tags}</p>${ end }
+
+      
+    </div>
+
+    
+
+    <div class="card-subtext muted-text">
+        ${ isset categories }<p class=>${ categories }</p>${ end }
+    </div>
+  </article>
+</div>    
+</script>
+      
+
+</body>
+</html>

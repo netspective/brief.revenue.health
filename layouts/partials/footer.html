@@ -1,0 +1,77 @@
+<footer class="footer-wrap">
+<article class="footer-row-1">
+<div class="row">
+
+<div class="col-md-3">
+<h3>Publications</h3>
+<ul class="foot-menu">
+<li><a target = "_blank" href="https://www.netspective.media/">Netspective Media</a></li>
+<li><a target = "_blank" href="https://www.healthcareguy.com/">The Healthcare IT Guy</a></li>
+<li><a target = "_blank" href="https://www.healthcareguys.com/">Healthcare Guys</a></li>
+<li><a target = "_blank" href="https://www.hitsphere.com/">HITSphere</a></li>
+<li><a target = "_blank" href="http://www.fedsphere.com/">FEDSphere</a></li>
+<li><a target = "_blank" href="http://www.netspective.com/cak/">Netspective CAK</a></li>
+</ul>
+</div>
+
+<div class="col-md-3">
+<h3>Recent Posts</h3>
+  {{ .Render "by-date" }}
+</div>
+
+<div class="col-md-3">
+<h3>Categories</h3>
+ 
+ <div class="form-group">
+	 
+	  
+	<select name="cat" id="cat" class="form-control" onchange="location = this.value;">
+		<option value="">Select</option>
+	 {{ range   $key, $value := .Site.Taxonomies.categories -}}
+	<option value="{{ (printf "%s%s" "categories/" ($key | urlize)) | absURL }}">{{ $key | humanize }}</option>
+	 {{- end }}
+	 
+</select>
+ 
+</div> 
+</div>
+
+<div class="col-md-3">
+<h3>CONTACT US</h3>
+
+  <form action="https://formspree.io/support@netspective.media" method="POST">
+
+      <div style="display:none;" class="thankyou_message">      
+        <span class = "sucess-msg">Thank you for your enquiry</span>
+      </div>
+
+  <div class="form-group">
+       <input type="text" placeholder="Name" class="form-control" name="name" id="firstname">
+       <span class="error" id="name" style="display: none;">The Field Required.</span>
+  </div>
+  <div class="form-group">
+     <input type="email" placeholder="Email" class="form-control" name="email" id="emailaddress">
+     <span class="error" id="email" style="display: none;">The Field Required.</span>
+  </div>
+
+   <div class="form-group">
+       <textarea rows="6" placeholder="Message" class="form-control" name="message" id="message"></textarea>
+   </div>
+   
+     <div id="cf-submit">
+                     <input type="submit" id="contactsubmit" class="btn btnsubmit quick-contact" value="Submit">
+      </div>  
+</form>
+<script data-cfasync="false" src="/js/form-submission-handler.js"></script>
+</div>	
+
+</div>		
+</article>  
+
+<article class="footer-row-2 text-center">
+<div class="social"><a target = "_blank" href="https://www.facebook.com/#"><i class="fab fa-facebook-f font"></i></a> <a target = "_blank" href="https://twitter.com/#"><i class="fab fa-twitter font"></i></a> 
+<a target = "_blank" href="https://plus.google.com/101459487750787187310"><i class="fab fa-google-plus-g font"></i></a> <a target = "_blank" href="https://www.linkedin.com/#"><i class="fab fa-linkedin-in font"></i></a></div>
+<div>© 2005-2019 Netspective Media LLC. All rights reserved.</div>	
+</article>  
+</footer>
+ <script src="/js/socialShare.js"></script>

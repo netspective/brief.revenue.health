@@ -1,0 +1,49 @@
+<div ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+   class="card blog-card custom-card-row" rel="bookmark" >
+    {{ if isset .Params "featuredimage" -}}
+    <div class="card-img-container">
+      {{ if gt .Params.socialScore 1 }}
+      <p class="card-img-overlay">{{ .Params.socialScore }} shares</p>
+      {{ else }}     
+      {{ if gt .Params.socialScore 0 }}
+      <p class="card-img-overlay">{{ .Params.socialScore }} share</p>
+      {{ end }}     
+      {{ end }}
+      <picture>
+        <a href="{{ .Permalink }}"><img src="{{.Params.featuredimage | absURL }}" class="card-img" {{ if isset .Params "featuredimagedescription" }}alt="{{.Params.featuredimagedescription}}"{{end}}></a>
+      </picture>
+    </div>
+
+    {{ else }}
+    <div class="card-img-container">
+         <picture>
+          <a href="{{ .Permalink }}"><img class="card-img" src="/img/no-image-article.jpg"></a>
+        </picture>
+      </div>
+    {{- end }}
+  <article class="card-body">
+    <a href="{{ .Permalink }}"><h2 class="card-title">{{ .Title }} </h2></a>
+    <div class="card-text ch-limit"><a href="{{ .Permalink }}">{{ .Content }}</a></div>
+    <div class="card-subtext muted-text row">
+      <div class="col-lg-8">
+        <a href="{{ .Permalink }}">
+        <p>Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time></p>
+        {{ if (isset .Params "categories") }}<p class=>{{ range .Params.categories }}#{{ . }} {{ end }}</p>{{ end }}</a>
+      </div>
+      <div class="col-lg-4">
+        <div class="social-share social-count-display">  
+          <a class=" fb-share-push" data-app="{{.Params.slug}}" data-slug="{{ .Permalink }}" data-name="{{ .Title }}" data-safe-url="{{ .Permalink | safeURL }}" href="#"><div class="small-bt-row" data-app="{{.Params.slug}}" ><span class="col a"><i class="fab fa-facebook-square cl-f"></i></span> </div></a>
+          <a class=" twitter-share-push" data-twitter="{{.Params.twitterUrl}}" data-app="{{.Params.slug}}" data-slug="{{ .Permalink }}" data-name="{{ .Title }}" data-safe-url="{{ .Permalink | safeURL }}" href="#"><div class="small-bt-row" ><span class="col a"><i class="fab fa-twitter-square cl-t"></i></span></div></a>
+          <a class="linkedin-share-push" data-app="{{.Params.slug}}" data-slug="{{ .Permalink }}" data-name="{{ .Title }}" data-safe-url="{{ .Permalink | safeURL }}" href="#"><div class="small-bt-row" data-app="{{.Params.slug}}" ><span class="col a"><i class="fab fa-linkedin"></i></span> </div></a>
+          <a class="email-share-push" data-app="{{.Params.slug}}" data-slug="{{ .Permalink }}" data-name="{{ .Title }}" data-safe-url="{{ .Permalink | safeURL }}" href="#"><div class="small-bt-row" data-app="{{.Params.slug}}" ><span class="col a"><i class="fas fa-envelope cl-m"></i></span> </div></a>
+          <div class="clearfix"></div>                
+                
+                <!--<a class="fb-share" href='https://www.facebook.com/sharer/sharer.php?u={{ $.Site.Params.socialshare }}{{ .Permalink | safeURL }}' target="_blank"><div class="social-ico face"><i class="fab fa-facebook-square cl-f"></i></div></a>
+                <a class="fb-share"  href='https://twitter.com/home?status={{ $.Site.Params.socialshare }}{{ .Permalink | safeURL }}'><div class="social-ico twit"><i class="fab fa-twitter"></i></div></a>         
+                <a class="fb-share" href='mailto:?subject={{ .Title }}&body={{ $.Site.Params.socialshare }}{{ .Permalink | safeURL }}' target="_blank"><div class="social-ico mail"><i class="fas fa-envelope"></i></div></a>           
+                <div class="clearfix"></div>-->
+        </div>
+      </div>
+    </div>
+  </article>
+</div>

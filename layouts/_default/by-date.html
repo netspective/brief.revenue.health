@@ -1,0 +1,10 @@
+{{ $list:=  (where .Site.Pages "Params.content" "!=" " ")  }}
+{{ range first 3 $list }}
+    {{ $page := . }}
+    {{ with .Params.date }}
+    <aside class="recent-post no-border">
+    <h5><a href="{{ $page.Permalink }}">{{ $page.Title }}</a></h5>
+    <span><time datetime="">{{ .Month }} {{ .Day }}, {{ .Year }}</time></span>
+    </aside>
+    {{ end }}
+{{ end }}

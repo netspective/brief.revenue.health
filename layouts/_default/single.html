@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
+  {{ partial "head.html" . }}
+  <body class="single-body">
+    {{ partial "nav-bar.html" . }}
+    <main class="content side-text-padding single-blog-card inner-card">
+      {{ if isset .Params "featuredimage" }}
+        <picture class="post-figure m-b-15">
+            <a href="{{ .Params.link }}"><img src="{{.Params.featuredimage | absURL }}" {{ if isset .Params "featuredimagedescription" }}alt="{{.Params.featuredimagedescription}}"{{end}}></a>
+        </picture>
+        {{ else }}
+         <picture class="post-figure m-b-15">
+             <img src="/img/no-image-article.jpg">
+        </picture>
+        {{ end }}
+        <article class="post {{ if ne .Params.dropcap false }}dropcase{{ end }}">
+        <div class = "cover-content">
+        <header class="post-header">
+          <h1 class="post-title">{{ .Title }}</h1>
+          <p class="post-date">Posted <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time> via <a style = "margin-left:3px; text-decoration: underline;" target = "_blank" href="{{ .Params.link }}">{{ .Params.linkBrand }}</a>
+          {{ if (isset .Params "categories") }} | {{ range .Params.categories }}<a style = "text-decoration: underline;" class="category" href="/categories/{{ . | urlize }}">#{{ . }}</a> {{ end }}{{ end }}
+          {{ if gt .Params.socialScore 0 }} | {{ .Params.socialScore }} shares{{ end }}
+          </p>          
+        </header>
+
+          {{ .Content }}
+        <hr>
+        <div class="detail-sm-block">
+          <h3>Share</h3>
+        <a href="http://twitter.com/share?url={{ .Permalink }}&amp;text={{ .Title }}&amp;via={{ .Site.Social.twitter }}" target="_blank" class="share-btn twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="http://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" class="share-btn facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="http://www.linkedin.com/shareArticle?url={{ .Permalink }}&amp;title={{ .Title }}" target="_blank" class="share-btn linkedin">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:?subject=Check out this post by {{ .Params.author }}&amp;body={{ .Permalink }}" target="_blank" class="share-btn email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        </div>
+        <hr>
+        Continue reading at <a style = "text-decoration: underline;" target = "_blank" href="{{ .Params.link }}">{{ .Params.linkBrand }}</a>
+        {{ if (isset .Params "categories") }} | {{ range .Params.categories }}<a style = "text-decoration: underline;" class="category" href="/categories/{{ . | urlize }}">#{{ . }}</a> {{ end }}{{ end }}        
+        {{ $related := .Site.RegularPages.Related . | first 5 }}
+        {{ with $related }}
+        <h3>See Also</h3>
+        <ul>
+          {{ range . }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+      </article>
+      {{ template "_internal/disqus.html" . }}
+<h3 class="text-center next-ttl">Next Article</h3>
+        <nav class="side-padding">
+      {{ with .PrevInSection }}
+      {{ .Render "li-next" }}
+      {{ end }}
+      
+    </nav>
+    </main>
+
+     
+   
+    {{ partial "footer.html" . }}
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

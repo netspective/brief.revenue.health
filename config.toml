@@ -1,0 +1,16 @@
+baseURL = "https://www.brief.health/"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+languageCode = "en-US"
+metaDataFormat = "yaml"
+paginate = 25
+
+[outputs]
+home = ["HTML", "RSS","JSON"]
+
+[params]
+brand = "Health IT Briefing"
+description = "Netspective Media Health IT Briefing"
+
+[permalinks]
+post = "/post/:year/:month/:day/:slug/"

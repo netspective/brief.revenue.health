@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}" dir="ltr">
+    <script src="/js/fuse_3.2.0.js"></script>
+    <script src="/js/jquery_3.3.1_min.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/infinity_scroll.js"></script>
+  {{ partial "head.html" . }}
+  <body>
+    {{ partial "nav-bar.html" . }}
+    <main id = "search-results" class="">
+      <!--<header class="list-header">
+        <p class="list-header-subtext">{{ .Description }}</p>
+        <h1 class="list-header-title">{{ .Title }}</h1>
+      </header> -->
+      {{ $paginator := .Paginate (where .Pages "Params.displayinlist" "!=" false) -}}
+      {{- range $paginator.Pages -}}
+        {{ .Render "li" }}
+      {{- end }}
+    </main>
+
+     {{ if $paginator.HasNext }}
+      <input type="hidden" name="has_next" value="1" pagId="{{ $paginator.PageNumber }}" >
+    {{ end }}
+    <input type="hidden" name="pageId" value="{{ $paginator.PageNumber }}" >
+
+    <!-- {{ if or ($paginator.HasPrev) ($paginator.HasNext) -}} -->
+    <nav class="pagination-nav side-padding"> 
+      <!-- {{ if $paginator.HasPrev }}<a href="{{ $paginator.Prev.URL }}" class="pagination-newer ">&lt; Newer Posts</a>{{ end }} -->
+      {{ if $paginator.HasNext }}<a  onclick="loadMore.loadCnt()" class="loadmore pagination-older nextpage">Load More ...</a>{{ end }}
+    </nav>
+    <!-- {{ end -}} -->
+    <div class="move_top"></div>
+    {{ partial "footer.html" . }}
+    {{ partial "scripts.html" . }}
+  </body>
+</html>
+
+<script id="search-result-template" type="text/x-js-template">
+  <div ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" class="card blog-card custom-card-row" rel="bookmark">
+      ${ isset featuredimage }<div class="card-img-container"><picture><a href="${ link }"> <img src="${featuredimage}" class="card-img" {{ if isset .Params "featuredimagedescription" }}alt="${Params.featuredimagedescription}"{{end}}> </a></picture></div>${ end }
+    <article class="card-body">
+      <a href="${ link }"><h2 class="card-title">${title}</h2></a>
+      <a href="${ link }"><div class="card-text ch-limit">${contents}</div></a>
+      <div id="summary-${key}">
+        ${ isset tags }<p>Tags: ${tags}</p>${ end }
+  
+        
+      </div>
+  
+      
+  
+      <div class="card-subtext muted-text">
+          ${ isset categories }<p class=>${ categories }</p>${ end }
+      </div>
+    </article>
+  </div>    
+  </script>
+
+
+<script type="text/javascript">
+ $(document).ready(function(){
+    var searchQuery = getUrlVars()["s"];
+    if(typeof(getUrlVars()["s"]) != 'undefined')
+    {
+      searchQuery = decodeURIComponent((location.search.split(name + '=')[1] || '').split('&')[0]).replace(/\+/g, ' ');
+      $('#search-query').val(searchQuery);
+    }
+  });
+
+$('.move_top').on('click',function(){
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  
+});
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    $(".move_top").css('display',"block");
+  } else {
+    $(".move_top").css('display', "none")  ;
+  }
+}
+
+$(document).ready(function () {
+    var personid = getCookie('personid');
+
+    if (personid != null) {
+        $(".fb-share-push").each(function () {
+            var safeUrl = $(this).attr("data-safe-url");
+            var shareUrl = "https://www.facebook.com/sharer/sharer.php?u={{ $.Site.Params.socialshare }}" + safeUrl;
+            $(this).attr('href', shareUrl);
+            $(this).addClass('fb-share');
+        });
+        $(".twitter-share-push").each(function () {
+            var safeUrl = $(this).attr("data-safe-url");
+            var shareUrl = "https://twitter.com/home?status={{ $.Site.Params.socialshare }}" + safeUrl;
+            $(this).attr('href', shareUrl);
+            $(this).addClass('fb-share');
+        });
+            $(".linkedin-share-push").each(function () {
+            var safeUrl = $(this).attr("data-safe-url");
+            var shareUrl = "http://www.linkedin.com/shareArticle?url={{ $.Site.Params.socialshare }}" + safeUrl;
+            $(this).attr('href', shareUrl);
+            $(this).addClass('fb-share');
+        });
+        $(".email-share-push").each(function () {
+            var safeUrl = $(this).attr("data-safe-url");
+            var shareUrl = "mailto:?subject={{ .Title }}&body={{ $.Site.Params.socialshare }}" + safeUrl;
+            $(this).attr('href', shareUrl);
+            $(this).addClass('fb-share');
+        });
+
+    }
+    else {
+
+        $(".twitter-share-push").each(function () {
+            $(this).attr("data-toggle", 'modal');
+            $(this).attr("data-target", '#loginModalCenter');
+        });
+        $(".email-share-push").each(function () {
+            $(this).attr("data-toggle", 'modal');
+            $(this).attr("data-target", '#loginModalCenter');
+        });
+    }
+
+    $('.fb-share').click(function(e) {
+        e.preventDefault();
+        window.open($(this).attr('href'), 'fbShareWindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+        return false;
+      });
+});
+</script>

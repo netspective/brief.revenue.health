@@ -1,0 +1,119 @@
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W476329"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="container">
+<nav class="nav-bar side-padding">
+  <!-- <h1 class="nav-header"><a href="{{ .Site.BaseURL }}" class="nav-text">
+    {{- if isset $.Site.Params "brand"}}
+      {{- $.Site.Params.brand -}}
+    {{ else }}
+      {{- $.Site.Title -}}
+    {{ end -}}
+  </a></h1> -->
+  <article class="row">
+  <div class="col-md-7"> <h1 class="nav-header"><a href="{{ .Site.BaseURL }}" class="nav-text">Revenue Health</a></h1></div>
+  <div class="col-md-4">
+    <form id="searchsubmit" action="/">
+ <div class="input-group">
+   <input type="text" id="search-query" name="s" class="  search-query form-control" placeholder="Search" />
+   <span class="input-group-btn">
+     <button id = "zoomsearch" class="btn btn-default" type="submit"> <i class="fas fa-search"></i> </button>
+   </span>
+   </div> 
+     </form>   
+</div>
+  <div class="col-md-1 hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+       
+      {{ range where .Site.Pages "Params.displayinmenu" true -}}
+        <li><a href="{{ .Permalink }}" class="hamburger-menu-overlay-link">{{ .Title }}</a></li>
+      {{ end -}}
+      {{ range $key, $value := .Site.Taxonomies.categories -}}
+      <li><a href="{{ (printf "%s%s" "categories/" ($key | urlize)) | absURL }}" class="hamburger-menu-overlay-link">{{ $key | humanize }}</a></li>
+      {{- end }}
+    </ul>
+  </div>
+  </article>
+  
+
+</nav>
+
+<div class="b-t-1 menu-bg">
+<div class="col-lg-9 col-md-8 col-sm-7 main-nav">
+<nav class="navbar navbar-default">
+ <!-- <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+ 
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class=""><a href="{{ .Site.BaseURL }}">Home <span class="sr-only">(current)</span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Categories <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+      {{ range $key, $value := .Site.Taxonomies.categories -}}
+          
+      <li><a href="{{ (printf "%s%s" "categories/" ($key | urlize)) | absURL }}" class="hamburger-menu-overlay-link">{{ $key | humanize }}</a></li>
+      {{- end }}  
+           
+          </ul>
+        </li>
+      </ul>
+
+
+    </div>
+    -->
+</nav>
+
+
+</div>
+<div class="col-lg-3 col-md-4 col-sm-5">
+<div class="pull-right owned">
+          <div class="pull-right text-left">Curated and published by <br>
+            <a href="http://shahidshah.com/" target="blank">@ShahidNShah</a> </div>
+          <div class="pull-right"><img src="/img/shahid-sha.png" width="40"></div>
+          <div class="clear-fix"></div>
+        </div>
+</div>
+<div class="clearfix"></div>
+</div>
+
+<script type="text/javascript">
+
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+        if(typeof(hash[1]) != 'string')
+        vars[hash[0]] = null;
+    }
+    return vars;
+}  
+ $(document).ready(function(){
+    var searchQuery = getUrlVars()["s"];
+    if(typeof(getUrlVars()["s"]) != 'undefined')
+    {
+      searchQuery = decodeURIComponent((location.search.split(name + '=')[1] || '').split('&')[0]).replace(/\+/g, ' ');
+      $('#search-query').val(searchQuery);
+    }
+  });
+
+
+</script>

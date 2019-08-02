@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS~PK Responsive Document */
+@media (max-width:1920px) {
+}
+@media (max-width:1700px) {
+}
+@media (max-width:1440px) {
+}
+@media (max-width:1279px) {
+}
+@media (max-width:1199px) {
+.cover-content {
+    margin-top: -290px;
+}
+}
+@media (max-width:1040px) {
+}
+@media (max-width:991px) {
+/*.hamburger-menu {
+    margin-top: -85px;
+}*/  
+.cover-content {
+    margin-top: -170px;
+}  
+}
+
+@media (max-width:800px) {
+}
+@media (max-width:767px) {
+.cover-content {
+    margin-top: -140px;
+    padding: 30px;
+}
+}
+
+@media (max-width:640px) { /* Mobile */
+.hamburger-menu-overlay {
+    text-align: left!important;
+}
+.owned {
+    margin-right: 32%;
+}
+.inner-card {
+    padding-top: 18px!important;
+}
+.post-title {
+    font-size: 1.5em!important;
+}
+.cover-content {
+    margin-top: -100px;
+}
+}
+
+@media (max-width:520px) {
+.owned {
+    margin-right: 28%;
+}
+.cover-content {
+    margin-top: -105px;
+}    
+}
+
+@media (max-width:480px) {
+.cover-content {
+    width:90%;
+    padding: 20px 25px;
+}
+}
+
+@media (max-width:425px) {
+.owned {
+    margin-right: 25%;
+}
+}
+
+@media (max-width:375px) {
+.hamburger-menu button {
+    width: 30px;
+    margin-top: 8px;
+}
+.hamburger-menu button span {
+    width: 30px;
+}  
+.hamburger-menu button span:first-of-type {
+    margin-bottom: 4px;
+}  
+}
+
+@media (max-width:320px) {
+}

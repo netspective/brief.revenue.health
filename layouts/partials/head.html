@@ -1,0 +1,64 @@
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{{ if not .IsHome }}{{ .Title }} &middot; {{ end }}{{ .Site.Title }}</title>
+  <meta name="description" content="{{if .IsHome}}{{ $.Site.Params.description }}{{else}}{{.Description}}{{end}}" />
+
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{.Params.title }}" />
+<meta property="og:description" content="{{.Summary }}">
+<meta property="og:site_name" content="Medigy" />
+<meta property="og:image" content="{{.Params.featuredImage }}" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@Medigy" />
+<meta name="twitter:title" content="{{.Params.title }}" />
+<meta name="twitter:description" content="{{.Summary }}" />
+<meta name="twitter:image" content="{{.Params.featuredImage }}" />
+  
+ 
+
+  <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+  
+   <script type="text/javascript" src="/js/jquery-3.1.1.min.js" /></script> 
+   
+
+ 
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ "css/style.css" | absURL}}" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+  {{ template "_internal/google_analytics.html" . }}
+  {{ if isset $.Site.Params "bgimg" -}}
+  <style>
+    body {
+      background: #ecedef url("{{ $.Site.Params.bgimg | absURL | safeCSS }}") repeat;
+    }
+  </style>
+  {{- end }}
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />  
+  <link rel="stylesheet" href="/css/custom-brief.css" /> 
+  <link rel="stylesheet" href="/css/responsive.css" />
+  <link rel="stylesheet" href="/css/fontawesome_v5.6.3_all.css">
+  
+  <!-- bootstrap & jquery js -->
+ 
+  <script type="text/javascript" src="/js/bootstrap.min.js" /></script>  
+
+  
+  
+<!-- Google Tag Manager -->
+
+<!-- End Google Tag Manager -->
+
+  
+</head>
